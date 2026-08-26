@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Account | Novalis</title>
+  <meta name="description" content="Sign in to view your Novalis orders." />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="nav" id="top">
+    <div class="nav__inner">
+      <a class="nav__logo" href="/">novalis</a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/shop/">Shop</a>
+        <a href="/account/">Account</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero hero--compact" id="hero">
+      <div class="section__inner section__inner--narrow">
+        <p class="eyebrow eyebrow--center">Account</p>
+
+        <div class="auth-panel" id="signedOutPanel">
+          <div class="auth-tabs">
+            <button class="auth-tab is-active" id="tabSignIn" type="button">Sign In</button>
+            <button class="auth-tab" id="tabSignUp" type="button">Create Account</button>
+          </div>
+
+          <form class="auth-form is-open" id="signInForm">
+            <input type="email" id="signInEmail" placeholder="you@example.com" required aria-label="Email address" />
+            <input type="password" id="signInPassword" placeholder="Password" required aria-label="Password" />
+            <button type="submit" class="btn btn--primary">Sign In</button>
+          </form>
+          <button class="link-btn" id="forgotPasswordBtn" type="button">Forgot password?</button>
+
+          <form class="auth-form" id="signUpForm">
+            <input type="email" id="signUpEmail" placeholder="you@example.com" required aria-label="Email address" />
+            <input type="password" id="signUpPassword" placeholder="Password (min. 6 characters)" required minlength="6" aria-label="Password" />
+            <input type="password" id="signUpPasswordConfirm" placeholder="Confirm password" required minlength="6" aria-label="Confirm password" />
+            <button type="submit" class="btn btn--primary">Create Account</button>
+          </form>
+        </div>
+
+        <div class="auth-panel" id="recoveryPanel" hidden>
+          <h1 class="account-title">Set a new password</h1>
+          <p class="account-copy">Enter a new password for your account.</p>
+          <form class="auth-form" id="recoveryForm">
+            <input type="password" id="newPassword" placeholder="New password (min. 6 characters)" required minlength="6" aria-label="New password" />
+            <button type="submit" class="btn btn--primary">Update Password</button>
+          </form>
+        </div>
+
+        <div class="auth-panel" id="signedInPanel" hidden>
+          <h1 class="account-title">Your orders</h1>
+          <p class="account-copy" id="accountEmail"></p>
+          <button class="btn btn--ghost" id="signOutBtn">Sign Out</button>
+
+          <div class="orders-list" id="ordersList"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="/" class="nav__logo">novalis</a>
+        <p class="footer__tagline">Better Sleep. Automatically.</p>
+      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/shop/">Shop</a>
+        <a href="/#how-it-works">How It Works</a>
+        <a href="/account/">Account</a>
+        <a href="/terms/">Terms</a>
+        <a href="/privacy/">Privacy</a>
+      </nav>
+      <p class="footer__copy">&copy; 2026 Novalis. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="account.js"></script>
+</body>
+</html>

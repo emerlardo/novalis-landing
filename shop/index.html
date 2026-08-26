@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop Nova One | Novalis</title>
+  <meta name="description" content="Order Nova One, the first device from Novalis." />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="nav" id="top">
+    <div class="nav__inner">
+      <a class="nav__logo" href="/">novalis</a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/shop/">Shop</a>
+        <a href="/#how-it-works">How It Works</a>
+        <a href="/account/">Account</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="hero">
+      <div class="hero__inner">
+        <div class="hero__copy reveal">
+          <p class="eyebrow">Shop</p>
+          <h1>Nova One</h1>
+          <p class="hero__sub">
+            The first device from Novalis, built to help you sleep better, automatically.
+            Reserve yours for $149. No payment required today. We'll notify you when
+            Nova One is ready to ship.
+          </p>
+          <div class="hero__actions">
+            <button class="btn btn--primary" id="buyBtn" disabled>Loading…</button>
+            <a href="/" class="btn btn--ghost">Learn More</a>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal">
+          <div class="device-aura"></div>
+          <div class="sound-wave" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="device">
+            <div class="device__sheen"></div>
+            <div class="device__ring"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="solution" id="status">
+      <div class="section__inner section__inner--narrow">
+        <p class="eyebrow eyebrow--center reveal">Where things stand</p>
+        <h2 class="reveal">Nova One is in final development.</h2>
+        <p class="solution__copy reveal">
+          Reserving today locks in your spot and the $149 price. No payment is required
+          until Nova One is ready to ship. We'll email you with updates, and you can check
+          your reservation anytime from your account.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="/" class="nav__logo">novalis</a>
+        <p class="footer__tagline">Better Sleep. Automatically.</p>
+      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/shop/">Shop</a>
+        <a href="/#how-it-works">How It Works</a>
+        <a href="/account/">Account</a>
+        <a href="/terms/">Terms</a>
+        <a href="/privacy/">Privacy</a>
+      </nav>
+      <p class="footer__copy">&copy; 2026 Novalis. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="shop.js"></script>
+</body>
+</html>
