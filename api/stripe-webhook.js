@@ -1,5 +1,8 @@
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
+import * as Sentry from "@sentry/node";
+
+Sentry.init({ dsn: "https://96bf11ce119787db512827c41692f5cc@o4511979641176065.ingest.us.sentry.io/4511979708350464" });
 
 export const config = {
   api: { bodyParser: false },
@@ -32,6 +35,7 @@ export default async function handler(req, res) {
     event = stripe.webhooks.constructEvent(buf, signature, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
     console.error("stripe-webhook signature error:", err.message);
+    Sentry.captureException(err);
     return res.status(400).send(`Webhook signature verification failed: ${err.message}`);
   }
 
@@ -43,6 +47,7 @@ export default async function handler(req, res) {
 
     if (!userId) {
       console.error("stripe-webhook: no user_id in session metadata", session.id);
+      Sentry.captureException(new Error(`stripe-webhook: no user_id in session metadata (${session.id})`));
     } else {
       const { error } = await supabaseAdmin.from("orders").insert({
         user_id: userId,
@@ -55,6 +60,7 @@ export default async function handler(req, res) {
 
       if (error && error.code !== "23505") {
         console.error("stripe-webhook insert error:", error);
+        Sentry.captureException(new Error(`stripe-webhook insert error: ${error.message}`));
         return res.status(500).json({ error: "Failed to record order" });
       }
 

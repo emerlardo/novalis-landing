@@ -1,5 +1,8 @@
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
+import * as Sentry from "@sentry/node";
+
+Sentry.init({ dsn: "https://96bf11ce119787db512827c41692f5cc@o4511979641176065.ingest.us.sentry.io/4511979708350464" });
 
 const SUPABASE_URL = "https://gwlnepcglnsyetwkspxy.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_tgUOT9wPorTQvVRmFCJqLA_cw3KxK85";
@@ -50,6 +53,7 @@ export default async function handler(req, res) {
     res.status(200).json({ url: session.url });
   } catch (err) {
     console.error("create-checkout-session error:", err);
+    Sentry.captureException(err);
     res.status(500).json({ error: "Could not start checkout" });
   }
 }
