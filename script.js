@@ -32,6 +32,11 @@ preorderBtn.addEventListener("click", () => {
   if (waitlistForm.classList.contains("is-open")) waitlistEmail.focus();
 });
 
+document.getElementById("stickyCtaBtn").addEventListener("click", () => {
+  preorderBtn.scrollIntoView({ behavior: "smooth", block: "center" });
+  preorderBtn.click();
+});
+
 let supabaseClientPromise = null;
 
 function getSupabaseClient() {

@@ -19,6 +19,7 @@ function showToast(message) {
 async function reserve(userId) {
   buyBtn.disabled = true;
   buyBtn.textContent = "Reserving…";
+  syncStickyButton();
 
   const { error } = await supabase.from("orders").insert({
     user_id: userId,
@@ -33,11 +34,13 @@ async function reserve(userId) {
     showToast("Something went wrong. Try again.");
     buyBtn.disabled = false;
     buyBtn.textContent = "Reserve Yours ($149)";
+    syncStickyButton();
     return;
   }
 
-  showToast("You're reserved. No payment required today.");
   buyBtn.textContent = "Reserved ✓";
+  syncStickyButton();
+  window.location.href = "/shop/success/";
 }
 
 async function hasExistingReservation(userId) {
@@ -51,6 +54,13 @@ async function hasExistingReservation(userId) {
   return Boolean(data && data.length);
 }
 
+const stickyCtaBtn = document.getElementById("stickyCtaBtn");
+
+function syncStickyButton() {
+  stickyCtaBtn.textContent = buyBtn.textContent;
+  stickyCtaBtn.disabled = buyBtn.disabled;
+}
+
 async function updateButton() {
   const {
     data: { session },
@@ -62,6 +72,7 @@ async function updateButton() {
     buyBtn.onclick = () => {
       window.location.href = "/account/";
     };
+    syncStickyButton();
     return;
   }
 
@@ -70,13 +81,20 @@ async function updateButton() {
   if (alreadyReserved) {
     buyBtn.disabled = true;
     buyBtn.textContent = "Reserved ✓";
+    syncStickyButton();
     return;
   }
 
   buyBtn.disabled = false;
   buyBtn.textContent = "Reserve Yours ($149)";
   buyBtn.onclick = () => reserve(session.user.id);
+  syncStickyButton();
 }
+
+stickyCtaBtn.addEventListener("click", () => {
+  buyBtn.scrollIntoView({ behavior: "smooth", block: "center" });
+  buyBtn.click();
+});
 
 updateButton();
 supabase.auth.onAuthStateChange(() => updateButton());
