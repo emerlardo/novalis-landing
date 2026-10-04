@@ -621,50 +621,6 @@ h1, h2, h3 {
   }
 }
 
-/* Gallery */
-
-.gallery {
-  background: var(--bg-alt);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.gallery h2 {
-  text-align: center;
-  font-size: clamp(30px, 4vw, 44px);
-  margin-bottom: 64px;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-.gallery-item {
-  margin: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: var(--surface);
-}
-
-.gallery-item--wide {
-  grid-column: 1 / -1;
-}
-
-.gallery-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-@media (max-width: 640px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* FAQ */
 
 .faq-list {
