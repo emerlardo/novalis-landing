@@ -3,9 +3,10 @@ import { SUPABASE_URL, SUPABASE_ANON_KEY } from "../supabase-config.js";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const NOVA_ONE_PRICE_CENTS = 14900;
-
 const buyBtn = document.getElementById("buyBtn");
+const stickyCtaBtn = document.getElementById("stickyCtaBtn");
+const reserveForm = document.getElementById("reserveForm");
+const reserveEmail = document.getElementById("reserveEmail");
 const toast = document.getElementById("toast");
 let toastTimer;
 
@@ -16,88 +17,48 @@ function showToast(message) {
   toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 3200);
 }
 
-async function reserve(userId) {
-  buyBtn.disabled = true;
-  buyBtn.textContent = "Reserving…";
-  syncStickyButton();
-
-  const { error } = await supabase.from("orders").insert({
-    user_id: userId,
-    product: "Nova One",
-    amount_cents: NOVA_ONE_PRICE_CENTS,
-    currency: "usd",
-    status: "reserved",
-  });
-
-  if (error) {
-    console.error("reserve error:", error);
-    showToast("Something went wrong. Try again.");
-    buyBtn.disabled = false;
-    buyBtn.textContent = "Reserve Yours ($149)";
-    syncStickyButton();
-    return;
-  }
-
-  buyBtn.textContent = "Reserved ✓";
-  syncStickyButton();
-  window.location.href = "/shop/success/";
+function openReserveForm() {
+  reserveForm.classList.add("is-open");
+  reserveEmail.focus();
 }
 
-async function hasExistingReservation(userId) {
-  const { data } = await supabase
-    .from("orders")
-    .select("id")
-    .eq("user_id", userId)
-    .eq("product", "Nova One")
-    .limit(1);
-
-  return Boolean(data && data.length);
-}
-
-const stickyCtaBtn = document.getElementById("stickyCtaBtn");
-
-function syncStickyButton() {
-  stickyCtaBtn.textContent = buyBtn.textContent;
-  stickyCtaBtn.disabled = buyBtn.disabled;
-}
-
-async function updateButton() {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (!session) {
-    buyBtn.disabled = false;
-    buyBtn.textContent = "Sign In to Reserve";
-    buyBtn.onclick = () => {
-      window.location.href = "/account/";
-    };
-    syncStickyButton();
-    return;
-  }
-
-  const alreadyReserved = await hasExistingReservation(session.user.id);
-
-  if (alreadyReserved) {
-    buyBtn.disabled = true;
-    buyBtn.textContent = "Reserved ✓";
-    syncStickyButton();
-    return;
-  }
-
-  buyBtn.disabled = false;
-  buyBtn.textContent = "Reserve Yours ($149)";
-  buyBtn.onclick = () => reserve(session.user.id);
-  syncStickyButton();
-}
+buyBtn.addEventListener("click", openReserveForm);
 
 stickyCtaBtn.addEventListener("click", () => {
   buyBtn.scrollIntoView({ behavior: "smooth", block: "center" });
-  buyBtn.click();
+  openReserveForm();
 });
 
-updateButton();
-supabase.auth.onAuthStateChange(() => updateButton());
+reserveForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const email = reserveEmail.value.trim();
+  if (!email) return;
+
+  const submitBtn = reserveForm.querySelector("button");
+  submitBtn.disabled = true;
+
+  try {
+    const { error } = await supabase.from("waitlist").insert({ email });
+
+    if (error) {
+      showToast(
+        error.code === "23505"
+          ? "You're already reserved. We'll be in touch."
+          : "Something went wrong. Try again."
+      );
+      return;
+    }
+
+    reserveEmail.value = "";
+    reserveForm.classList.remove("is-open");
+    window.location.href = "/shop/success/";
+  } catch (err) {
+    console.error("reserve error:", err);
+    showToast("Something went wrong. Try again.");
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
 
 const revealEls = document.querySelectorAll(".reveal");
 const revealObserver = new IntersectionObserver(
@@ -112,3 +73,11 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.15 }
 );
 revealEls.forEach((el) => revealObserver.observe(el));
+
+// Anything already on screen at load shows straight away, so the page is never
+// blank if the observer is slow or unavailable.
+revealEls.forEach((el) => {
+  if (el.getBoundingClientRect().top < window.innerHeight) {
+    el.classList.add("is-visible");
+  }
+});

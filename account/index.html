@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>document.documentElement.classList.add("js");</script>
   <script src="https://js.sentry-cdn.com/96bf11ce119787db512827c41692f5cc.min.js" crossorigin="anonymous"></script>
   <title>Your Account | Novalis</title>
   <meta name="description" content="Sign in to view your Novalis orders." />
@@ -16,7 +17,10 @@
   <header class="nav" id="top">
     <div class="nav__inner">
       <a class="nav__logo" href="/">novalis</a>
-      <nav class="nav__links" aria-label="Primary">
+      <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav__links" id="navLinks" aria-label="Primary">
         <a href="/">Home</a>
         <a href="/shop/">Shop</a>
         <a href="/account/">Account</a>
@@ -91,5 +95,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script type="module" src="account.js"></script>
+  <script src="/nav.js"></script>
 </body>
 </html>

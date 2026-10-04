@@ -14,6 +14,14 @@ const revealObserver = new IntersectionObserver(
 
 revealEls.forEach((el) => revealObserver.observe(el));
 
+// Anything already on screen at load shows straight away, so the page is never
+// blank if the observer is slow or unavailable.
+revealEls.forEach((el) => {
+  if (el.getBoundingClientRect().top < window.innerHeight) {
+    el.classList.add("is-visible");
+  }
+});
+
 const preorderBtn = document.getElementById("preorderBtn");
 const waitlistForm = document.getElementById("waitlistForm");
 const waitlistEmail = document.getElementById("waitlistEmail");

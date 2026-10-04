@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>document.documentElement.classList.add("js");</script>
   <script src="https://js.sentry-cdn.com/96bf11ce119787db512827c41692f5cc.min.js" crossorigin="anonymous"></script>
   <title>Nova One: Better Sleep. Automatically. | Novalis</title>
-  <meta name="description" content="Nova One is a smart nightstand fan controller that automatically creates the perfect sleep environment. No app needed." />
+  <meta name="description" content="Nova One is a smart nightstand sleep device. It cools your room, wakes you with light, and masks noise automatically. No app, no account, no subscription." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Nova One: Better Sleep. Automatically." />
   <meta property="og:description" content="Nova One is a smart nightstand device built to help you sleep better, automatically. No app needed." />
@@ -21,7 +22,10 @@
   <header class="nav" id="top">
     <div class="nav__inner">
       <a class="nav__logo" href="#top">novalis</a>
-      <nav class="nav__links" aria-label="Primary">
+      <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav__links" id="navLinks" aria-label="Primary">
         <a href="#top">Home</a>
         <a href="/shop/">Shop</a>
         <a href="#how-it-works">How It Works</a>
@@ -37,8 +41,9 @@
           <p class="eyebrow">Introducing Nova One</p>
           <h1>Better Sleep.<br />Automatically.</h1>
           <p class="hero__sub">
-            Nova One is a smart nightstand device built to help you sleep better, automatically.
-            No app, no dials, nothing to configure. Just set it down and let it work.
+            Nova One cools your room, wakes you with light instead of an alarm, and masks the
+            noise that pulls you out of sleep. Nothing to install, no account, no subscription,
+            and nothing about your night ever leaves your house.
           </p>
           <div class="hero__actions">
             <button class="btn btn--primary" id="preorderBtn">Pre-order Now</button>
@@ -106,6 +111,19 @@
               <p>You're already half asleep before you remember the fan, or you wake up freezing because you never turned it off.</p>
             </div>
           </div>
+
+          <div class="problem-row reveal">
+            <span class="problem-row__number">04</span>
+            <svg class="problem-row__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 10a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5h-15S6 14 6 10Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+              <path d="M10 18.5a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M3.5 5.5 6 3.5M20.5 5.5 18 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <div class="problem-row__text">
+              <h3>Your alarm jolts you awake in the dark</h3>
+              <p>A sound blaring in a pitch-black room is a terrible way to start the day, and it leaves you groggy for hours.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -113,11 +131,45 @@
     <section class="solution" id="solution">
       <div class="section__inner section__inner--narrow">
         <p class="eyebrow eyebrow--center reveal">The Fix</p>
-        <h2 class="reveal">Nova One handles it. Automatically.</h2>
+        <h2 class="reveal">One device. All four, handled.</h2>
         <p class="solution__copy reveal">
-          Nova One quietly senses your room and adjusts on its own, all night long. You never
-          touch a dial, open an app, or think about it again. You just sleep better.
+          Nova One sits on your nightstand and runs the room while you sleep. It fixes the
+          environment, not you, and it does it without an app or a single setting to manage.
         </p>
+
+        <div class="problem-list">
+          <div class="problem-row reveal">
+            <span class="problem-row__number">Fan</span>
+            <div class="problem-row__text">
+              <h3>Keeps the room cool</h3>
+              <p>A quiet 120mm fan runs on room temperature and your bedtime schedule, so the room cools itself before you notice it's warm.</p>
+            </div>
+          </div>
+
+          <div class="problem-row reveal">
+            <span class="problem-row__number">Light</span>
+            <div class="problem-row__text">
+              <h3>Wakes you with light, not noise</h3>
+              <p>Four light bars build a sunrise over 30 minutes instead of an alarm going off. At bedtime they fade red to amber to off, and red light at night doesn't suppress melatonin.</p>
+            </div>
+          </div>
+
+          <div class="problem-row reveal">
+            <span class="problem-row__number">Sound</span>
+            <div class="problem-row__text">
+              <h3>Covers the noise that wakes you</h3>
+              <p>Pink, brown and white noise generated live, plus rain and thunder. A built-in microphone listens to the room and raises the masking level when it gets louder outside, so a car at 3am doesn't reach you.</p>
+            </div>
+          </div>
+
+          <div class="problem-row reveal">
+            <span class="problem-row__number">Clock</span>
+            <div class="problem-row__text">
+              <h3>Tells the time, then disappears</h3>
+              <p>The time sits behind a smoked acrylic panel, readable from bed, and vanishes completely when the screen is off.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -138,16 +190,16 @@
           <div class="timeline__step reveal">
             <span class="timeline__marker">02</span>
             <div class="timeline__content">
-              <h3>It senses your room</h3>
-              <p>Nova One quietly starts paying attention to your room, right away.</p>
+              <h3>Press two buttons</h3>
+              <p>MODE sets the fan to auto, on or off. SOUND picks your noise. That's the whole interface, and most people never touch it again.</p>
             </div>
           </div>
 
           <div class="timeline__step reveal">
             <span class="timeline__marker">03</span>
             <div class="timeline__content">
-              <h3>You sleep better</h3>
-              <p>Nova One adjusts itself through the night, every night, so you don't have to.</p>
+              <h3>It runs the night for you</h3>
+              <p>Temperature, light and sound adjust on their own until morning. If you want to see trends or change the schedule, Nova One serves its own settings page over your home WiFi. That's optional, and nothing is ever uploaded anywhere.</p>
             </div>
           </div>
         </div>
@@ -171,18 +223,38 @@
           </details>
 
           <details class="faq-item">
-            <summary>Do I need an app to use it?</summary>
-            <p>No. Nova One works on its own once it's set up. No app required.</p>
+            <summary>Do I need an app?</summary>
+            <p>No, and there isn't one. Nova One runs from two buttons on the front. If you want trend charts or a different schedule, the device serves its own settings page over your home WiFi, which you open in a normal browser. Nothing to install, no account, no subscription.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Does it need WiFi?</summary>
+            <p>No. WiFi is optional and only used for the settings page on your home network. Without it, Nova One still runs the fan, light and sound exactly the same, and a battery-backed clock keeps the time.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Is there a subscription?</summary>
+            <p>No, and there never will be. You buy the device once. Every sound, the sunrise, the schedules and the charts are included, and your temperature and noise data stays on the device in your house.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How loud is it?</summary>
+            <p>The fan is a quiet 120mm model chosen for bedroom use, and it runs at low speed most of the night. The noise it plays is deliberate and the level is yours to set, so it should be the loudest thing you hear from it.</p>
+          </details>
+
+          <details class="faq-item">
+            <summary>What happens in a power cut?</summary>
+            <p>Nova One runs on mains power, so the fan, light and sound stop until power returns. A small backup battery keeps the clock accurate, so when the power comes back it picks your schedule up where it left off instead of asking you to set the time again.</p>
           </details>
 
           <details class="faq-item">
             <summary>What does Nova One actually sense?</summary>
-            <p>Nova One pays attention to your room, including temperature and sound, and adjusts automatically through the night.</p>
+            <p>Room temperature, humidity and noise level. It uses temperature to run the fan and noise to decide how much masking you need. It records nothing else, and there is no camera and no recording of what's said in the room.</p>
           </details>
 
           <details class="faq-item">
             <summary>Can I cancel my reservation?</summary>
-            <p>Yes, anytime. Email us at <a href="mailto:hello@shopnovalis.com">hello@shopnovalis.com</a> and we'll take care of it.</p>
+            <p>Yes, anytime, for any reason. Email <a href="mailto:hello@shopnovalis.com">hello@shopnovalis.com</a> and it's cancelled. Nothing is charged when you reserve, so there's nothing to refund.</p>
           </details>
         </div>
       </div>
@@ -215,5 +287,6 @@
   </div>
 
   <script type="module" src="script.js"></script>
+  <script src="/nav.js"></script>
 </body>
 </html>

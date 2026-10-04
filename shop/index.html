@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>document.documentElement.classList.add("js");</script>
   <script src="https://js.sentry-cdn.com/96bf11ce119787db512827c41692f5cc.min.js" crossorigin="anonymous"></script>
   <title>Shop Nova One | Novalis</title>
   <meta name="description" content="Order Nova One, the first device from Novalis." />
@@ -21,7 +22,10 @@
   <header class="nav" id="top">
     <div class="nav__inner">
       <a class="nav__logo" href="/">novalis</a>
-      <nav class="nav__links" aria-label="Primary">
+      <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav__links" id="navLinks" aria-label="Primary">
         <a href="/">Home</a>
         <a href="/shop/">Shop</a>
         <a href="/#how-it-works">How It Works</a>
@@ -37,14 +41,22 @@
           <p class="eyebrow">Shop</p>
           <h1>Nova One</h1>
           <p class="hero__sub">
-            The first device from Novalis, built to help you sleep better, automatically.
-            Reserve yours for $149. No payment required today. We'll notify you when
-            Nova One is ready to ship.
+            A fan, a sunrise light, adaptive sound masking and a bedside clock in one device.
+            $179, and that's the only time you pay. No subscription, ever.
+          </p>
+          <p class="hero__sub">
+            Reserving costs nothing and holds your place in the first batch. Leave your email
+            and we'll tell you before anything is ever charged.
           </p>
           <div class="hero__actions">
-            <button class="btn btn--primary" id="buyBtn" disabled>Loading…</button>
+            <button class="btn btn--primary" id="buyBtn">Reserve Yours</button>
             <a href="/" class="btn btn--ghost">Learn More</a>
           </div>
+
+          <form class="waitlist-form" id="reserveForm">
+            <input type="email" id="reserveEmail" placeholder="you@example.com" required aria-label="Email address" />
+            <button type="submit" class="btn btn--primary">Reserve</button>
+          </form>
         </div>
 
         <div class="hero__visual reveal">
@@ -60,14 +72,39 @@
       </div>
     </section>
 
+    <section class="gallery" id="gallery">
+      <div class="section__inner">
+        <p class="eyebrow eyebrow--center reveal">The device</p>
+        <h2 class="reveal">Nova One, up close</h2>
+        <div class="gallery-grid">
+          <figure class="gallery-item gallery-item--wide reveal">
+            <img src="/images/nova-one-nightstand.png" width="1600" height="1200" alt="Nova One on a nightstand in a dark bedroom, clock readable from the bed" loading="lazy" />
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="/images/nova-one-front.png" width="1200" height="1200" alt="Nova One from the front with the light bars lit" loading="lazy" />
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="/images/nova-one-angle.png" width="1200" height="1200" alt="Nova One at a three-quarter angle showing the MODE and SOUND buttons" loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
     <section class="solution" id="status">
       <div class="section__inner section__inner--narrow">
         <p class="eyebrow eyebrow--center reveal">Where things stand</p>
         <h2 class="reveal">Nova One is in final development.</h2>
         <p class="solution__copy reveal">
-          Reserving today locks in your spot and the $149 price. No payment is required
-          until Nova One is ready to ship. We'll email you with updates, and you can check
-          your reservation anytime from your account.
+          Reserving today holds your place in the first batch at $179. No card is taken and
+          no payment is due until Nova One is ready to ship, and we'll email you before that
+          happens. You can cancel any time by replying to that email or writing to
+          <a href="mailto:hello@shopnovalis.com">hello@shopnovalis.com</a>, and there's nothing
+          to refund because nothing was charged.
+        </p>
+        <p class="solution__copy reveal">
+          The first units are built by hand, one at a time, by Hanzalah Khan, who designs and
+          builds Nova One himself. That's also why the first batch is small and why we'd rather
+          tell you honestly that the ship date isn't fixed yet than invent one.
         </p>
       </div>
     </section>
@@ -98,5 +135,6 @@
   </div>
 
   <script type="module" src="shop.js"></script>
+  <script src="/nav.js"></script>
 </body>
 </html>
